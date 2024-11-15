@@ -24,5 +24,11 @@ jobs:
           git config user.email github-actions@users.noreply.github.com
           git add .
           current=`TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S'`
+          
+          
+          git checkout $COMMIT_SHA
+          git switch --create $BRANCH_NAME
+          git checkout origin/main -- ${ROOT_DIR}/.github/workflows
+          git add ${ROOT_DIR}/.github/workflows
           git commit -m "[${current}] random cron trigger by ${{ github.event_name }}"
           git push origin master
